@@ -1,1 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEET 2025 Countdown</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('background.jpg'); /* Reference your uploaded image */
+            background-size: cover;
+            background-position: center;
+            background-color: rgba(0, 0, 255, 0.6); /* Blue color with 60% opacity */
+            background-blend-mode: overlay; /* Blend the color with the image */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .countdown-container {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #FFD700;
+        }
+
+        #countdown {
+            font-size: 30px;
+        }
+
+        .time-box {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 40px;
+            color: #00FF00;
+        }
+
+        .time-label {
+            font-size: 16px;
+            color: #FFD700;
+        }
+    </style>
+</head>
+<body>
+
+<div class="countdown-container">
+    <h1>NEET UG is coming in</h1>
+    <div id="countdown">
+        <div class="time-box">
+            <span id="days"></span>
+            <div class="time-label">Days</div>
+        </div>
+        <div class="time-box">
+            <span id="hours"></span>
+            <div class="time-label">Hours</div>
+        </div>
+        <div class="time-box">
+            <span id="minutes"></span>
+            <div class="time-label">Minutes</div>
+        </div>
+        <div class="time-box">
+            <span id="seconds"></span>
+            <div class="time-label">Seconds</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const examDate = new Date('May 4, 2025 00:00:00').getTime();
+
+    const countdownTimer = setInterval(() => {
+        const now = new Date().getTime();
+        const timeLeft = examDate - now;
+
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerHTML = days;
+        document.getElementById('hours').innerHTML = hours;
+        document.getElementById('minutes').innerHTML = minutes;
+        document.getElementById('seconds').innerHTML = seconds;
+
+        if (timeLeft < 0) {
+            clearInterval(countdownTimer);
+            document.getElementById('countdown').innerHTML = "EXAM DAY!";
+        }
+    }, 1000);
+</script>
+
+</body>
+</html>
 
