@@ -10,13 +10,14 @@
             background-image: url('pexels-pixabay-40568.jpg'); /* Use the image you uploaded */
             background-size: cover;
             background-position: center;
-            background-color: rgba(151, 193, 236, 0.4); /* Updated color (#97C1EC) with 40% opacity */
+            background-color: rgba(151, 193, 236, 0.4); /* Updated color (#97C1EC) with 55% opacity */
             background-blend-mode: overlay; /* Blend the color with the image */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            position: relative; /* Needed for watermark positioning */
         }
 
         .countdown-container {
@@ -54,6 +55,26 @@
             font-size: 16px;
             color: #FFFFFF; /* White color for the labels (Days, Hours, Minutes, Seconds) */
         }
+
+        /* Watermark styling */
+        .watermark {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 12px;
+            color: rgba(0,0,0); /* White with some transparency */
+            font-family: Arial, sans-serif;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle shadow for visibility */
+        }
+
+        .watermark a {
+            color: rgba(0,0,0); /* Slightly more visible link color */
+            text-decoration: none;
+        }
+
+        .watermark a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
     </style>
 </head>
 <body>
@@ -78,6 +99,11 @@
             <div class="time-label">Seconds</div>
         </div>
     </div>
+</div>
+
+<!-- Watermark with Instagram handle -->
+<div class="watermark">
+    Follow us on Instagram: <a href="https://www.instagram.com/MedPrep_Central" target="_blank">@MedPrep_Central</a>
 </div>
 
 <script>
