@@ -7,16 +7,21 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-image: url('pexels-pixabay-40568.jpg'); /* Use the image you uploaded */
+            background-size: cover;
+            background-position: center;
+            background-color: rgba(151, 193, 236, 0.4); /* Updated color (#97C1EC) with 55% opacity */
+            background-blend-mode: overlay; /* Blend the color with the image */
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            flex-direction: column;
             height: 100vh;
             margin: 0;
+            position: relative; /* Needed for watermark positioning */
         }
 
-        .container {
+        .countdown-container, .pomodoro-container {
             background-color: rgba(0, 0, 0, 0.7);
             color: #fff;
             text-align: center;
@@ -26,52 +31,101 @@
             margin-bottom: 20px; /* Space between timers */
         }
 
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #FFD700;
+        }
+
         #countdown, #pomodoro-timer {
-            font-size: 48px;
-            margin: 20px 0;
+            font-size: 30px;
         }
 
-        .controls button {
-            margin: 5px;
-            padding: 10px 20px;
-            border: none;
-            background-color: #FFD700;
-            color: black;
+        .time-box {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 40px;
+            color: #FFFFFF; /* White color for the timer text */
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8); /* White glow */
+        }
+
+        .time-label {
             font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
+            color: #FFFFFF; /* White color for the labels (Days, Hours, Minutes, Seconds) */
         }
 
-        .controls button:hover {
-            background-color: #FFC300;
+        /* Watermark styling */
+        .watermark {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 12px;
+            color: rgba(0,0,0); /* White with some transparency */
+            font-family: Arial, sans-serif;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle shadow for visibility */
+        }
+
+        .watermark a {
+            color: rgba(0,0,0); /* Slightly more visible link color */
+            text-decoration: none;
+        }
+
+        .watermark a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+
+        /* Pomodoro input styling */
+        input {
+            width: 50px;
+            text-align: center;
+            margin: 5px;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>NEET Countdown Timer</h1>
+<div class="countdown-container">
+    <h1>NEET UG is coming in</h1>
     <div id="countdown">
-        <span id="days"></span> Days
-        <span id="hours"></span> Hours
-        <span id="minutes"></span> Minutes
-        <span id="seconds"></span> Seconds
+        <div class="time-box">
+            <span id="days"></span>
+            <div class="time-label">Days</div>
+        </div>
+        <div class="time-box">
+            <span id="hours"></span>
+            <div class="time-label">Hours</div>
+        </div>
+        <div class="time-box">
+            <span id="minutes"></span>
+            <div class="time-label">Minutes</div>
+        </div>
+        <div class="time-box">
+            <span id="seconds"></span>
+            <div class="time-label">Seconds</div>
+        </div>
     </div>
 </div>
 
-<div class="container">
+<div class="pomodoro-container">
     <h1>Pomodoro Timer</h1>
-    <div>
-        <input type="number" id="pomodoro-hours" placeholder="0" min="0" step="1"> <span>Hours</span>
-        <input type="number" id="pomodoro-minutes" placeholder="0" min="0" step="1"> <span>Minutes</span>
-        <input type="number" id="pomodoro-seconds" placeholder="0" min="0" step="1"> <span>Seconds</span>
-    </div>
+    <input type="number" id="pomodoro-hours" placeholder="0" min="0" step="1"> Hours
+    <input type="number" id="pomodoro-minutes" placeholder="0" min="0" step="1"> Minutes
+    <input type="number" id="pomodoro-seconds" placeholder="0" min="0" step="1"> Seconds
     <div id="pomodoro-timer">00:00:00</div>
-    <div class="controls">
+    <div>
         <button onclick="startPomodoro()">Start</button>
         <button onclick="stopPomodoro()">Stop</button>
         <button onclick="resetPomodoro()">Reset</button>
     </div>
+</div>
+
+<!-- Watermark with Instagram handle -->
+<div class="watermark">
+    Follow us on Instagram: <a href="https://www.instagram.com/MedPrep_Central" target="_blank">@MedPrep_Central</a>
 </div>
 
 <!-- Audio for Pomodoro timer -->
@@ -153,7 +207,8 @@
     }
 
     function playMusic() {
-        document.getElementById('alarm-sound').play();
+        const audio = document.getElementById('alarm-sound');
+        audio.play();
     }
 
     function stopMusic() {
