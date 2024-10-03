@@ -3,23 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEET 2025 Countdown and Pomodoro Timer</title>
+    <title>Pomodoro Timer with Music</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url('pexels-pixabay-40568.jpg');
-            background-size: cover;
-            background-position: center;
-            background-color: rgba(151, 193, 236, 0.4);
-            background-blend-mode: overlay;
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
+            background-color: #f0f0f0;
         }
 
-        .countdown-container, .pomodoro-container {
+        .pomodoro-container {
             background-color: rgba(0, 0, 0, 0.7);
             color: #fff;
             text-align: center;
@@ -28,108 +23,29 @@
             box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.5);
         }
 
-        h1 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: #FFD700;
+        #pomodoro-timer {
+            font-size: 48px;
+            margin: 20px 0;
         }
 
-        #countdown, #pomodoro-timer {
-            font-size: 30px;
-        }
-
-        .time-box {
-            display: inline-block;
-            margin: 0 10px;
-        }
-
-        .time-box span {
-            display: block;
-            font-size: 40px;
-            color: #FFFFFF;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
-        }
-
-        .time-label {
-            font-size: 16px;
-            color: #FFFFFF;
-        }
-
-        .watermark {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            font-size: 12px;
-            color: rgba(0,0,0);
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        .watermark a {
-            color: rgba(0,0,0);
-            text-decoration: none;
-        }
-
-        .watermark a:hover {
-            text-decoration: underline;
-        }
-
-        /* Pomodoro Timer */
-        .pomodoro-controls {
-            margin-top: 20px;
-        }
-
-        button {
+        .pomodoro-controls button {
+            margin: 5px;
+            padding: 10px 20px;
+            border: none;
             background-color: #FFD700;
             color: black;
-            border: none;
-            padding: 10px 20px;
-            margin: 5px;
+            font-size: 16px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
         }
 
-        button:hover {
-            background-color: #FFB400;
+        .pomodoro-controls button:hover {
+            background-color: #FFC300;
         }
-
-        input {
-            padding: 5px;
-            font-size: 16px;
-            width: 60px;
-            text-align: center;
-            margin-right: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
     </style>
 </head>
 <body>
 
-<div class="countdown-container">
-    <h1>NEET UG is coming in</h1>
-    <div id="countdown">
-        <div class="time-box">
-            <span id="days"></span>
-            <div class="time-label">Days</div>
-        </div>
-        <div class="time-box">
-            <span id="hours"></span>
-            <div class="time-label">Hours</div>
-        </div>
-        <div class="time-box">
-            <span id="minutes"></span>
-            <div class="time-label">Minutes</div>
-        </div>
-        <div class="time-box">
-            <span id="seconds"></span>
-            <div class="time-label">Seconds</div>
-        </div>
-    </div>
-</div>
-
-<!-- Pomodoro Timer -->
 <div class="pomodoro-container">
     <h1>Pomodoro Timer</h1>
     <div>
@@ -145,38 +61,10 @@
     </div>
 </div>
 
-<!-- Watermark with Instagram handle -->
-<div class="watermark">
-    Follow us on Instagram: <a href="https://www.instagram.com/MedPrep_Central" target="_blank">@MedPrep_Central</a>
-</div>
-
-<!-- Sound alert -->
+<!-- Replace the src with the actual file name -->
 <audio id="alarm-sound" src="Romantic Doctor2 Openning Title (mp3cut.net).mp3" preload="auto"></audio>
 
 <script>
-    // NEET Countdown Timer
-    const examDate = new Date('May 4, 2025 00:00:00').getTime();
-    const countdownTimer = setInterval(() => {
-        const now = new Date().getTime();
-        const timeLeft = examDate - now;
-
-        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-        document.getElementById('days').innerHTML = days;
-        document.getElementById('hours').innerHTML = hours;
-        document.getElementById('minutes').innerHTML = minutes;
-        document.getElementById('seconds').innerHTML = seconds;
-
-        if (timeLeft < 0) {
-            clearInterval(countdownTimer);
-            document.getElementById('countdown').innerHTML = "EXAM DAY!";
-        }
-    }, 1000);
-
-    // Pomodoro Timer
     let pomodoroTime = 0;
     let pomodoroInterval;
 
@@ -200,7 +88,7 @@
                 } else {
                     clearInterval(pomodoroInterval);
                     pomodoroInterval = null;
-                    playAlarm();
+                    playMusic();
                     alert("Time's up! Take a break.");
                 }
             }, 1000);
@@ -226,7 +114,7 @@
             `${hours < 10 ? '0' : ''}${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     }
 
-    function playAlarm() {
+    function playMusic() {
         document.getElementById('alarm-sound').play();
     }
 </script>
